@@ -1,11 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 import sys
-from scipy import misc
-from scipy.spatial import distance
-import numpy as np
 import multiprocessing as mp
+import numpy as np
 from multiprocessing import Pool
+from scipy import misc
 from skimage.color import rgb2lab, lab2rgb
 
 try:
@@ -13,6 +12,10 @@ try:
     PIXELSETlab = np.delete(rgb2lab(1.0 * np.array([PIXELSET]))[0], 0, 1)
 except ImportError:
     print("Error: You need to generate pixelset.py with gen_set.cpp.")
+    exit(1)
+
+if len(sys.argv) == 1:
+    print("Syntax:", sys.argv[0], "[PNG_FILE]")
     exit(1)
 
 def closest_node(node, nodes):
@@ -24,10 +27,6 @@ def closest_node(node, nodes):
 def fix(p):
     """Find the closest pixel in pixelset to pixel |p|"""
     return PIXELSET[closest_node(p, PIXELSETlab)]
-
-if len(sys.argv) == 1:
-    print("Syntax:", sys.argv[0], "[PNG_FILE]")
-    exit(1)
 
 ifname, ofname = sys.argv[1], "out" + sys.argv[1]
 im = misc.imread(ifname)
