@@ -28,7 +28,7 @@ def fix(p):
     """Find the closest pixel in pixelset to pixel |p|"""
     return PIXELSET[closest_node(p, PIXELSETlab)]
 
-ifname, ofname = sys.argv[1], "out" + sys.argv[1]
+ifname, ofname = sys.argv[1], sys.argv[1] + "-out.png"
 im = misc.imread(ifname)
 imlab = rgb2lab(im)
 
