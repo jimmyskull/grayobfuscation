@@ -11,8 +11,6 @@ from skimage.color import rgb2lab, lab2rgb
 try:
     from pixelset import PIXELSET
     PIXELSETlab = np.delete(rgb2lab(1.0 * np.array([PIXELSET]))[0], 0, 1)
-    #PIXELSETlab = rgb2lab(1.0 * np.array([PIXELSET]))
-    #print (PIXELSETlab)
 except ImportError:
     print("Error: You need to generate pixelset.py with gen_set.cpp.")
     exit(1)
@@ -24,7 +22,6 @@ def closest_node(node, nodes):    #print(node)
     return np.argmin(dist_2)
 
 def fix(p):
-    #print(p)
     """Find the closest pixel in pixelset to pixel |p|"""
     return PIXELSET[closest_node(p, PIXELSETlab)]
 
@@ -35,7 +32,6 @@ if len(sys.argv) == 1:
 ifname, ofname = sys.argv[1], "out" + sys.argv[1]
 im = misc.imread(ifname)
 imlab = rgb2lab(im)
-#print(imlab)
 
 def one_row(row):
     return [fix(tuple(p[1:3])) for p in row]
