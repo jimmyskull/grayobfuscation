@@ -15,7 +15,7 @@ except ImportError:
     print("Error: You need to generate pixelset.py with gen_set.cpp.")
     exit(1)
 
-def closest_node(node, nodes):    #print(node)
+def closest_node(node, nodes):
     nodes = np.asarray(nodes)
     deltas = nodes - node
     dist_2 = np.einsum('ij,ij->i', deltas, deltas)
